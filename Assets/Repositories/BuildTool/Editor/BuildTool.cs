@@ -4,21 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using CompressionLevel = System.IO.Compression.CompressionLevel;
+using Debug = UnityEngine.Debug;
 
 namespace Repositories.BuildTool.Editor
 {
-    public class BuildSettings
-    {
-        public string buildFolder = "Build";
-        public string buildName = "Game";
-        public string version = "1.0.0";
-    }
-
     public class BuildTool : EditorWindow
     {
         private readonly JsonSerializerSettings _settings = new()
@@ -26,12 +19,18 @@ namespace Repositories.BuildTool.Editor
             Formatting = Formatting.Indented
         };
 
-        private BuildSettings _buildSettings = new();
+        private BuildSettings _buildSettings;
 
-        private string _settingsPath = Path.Combine(Application.dataPath, "build-settings.json");
+        private readonly string _settingsPath = Path.Combine(Application.dataPath, "build-settings.json");
 
         public void OnGUI()
         {
+            if (_buildSettings == null)
+            {
+                Load();
+                _buildSettings ??= new BuildSettings();
+            }
+
             GUILayout.Label("Build tools", EditorStyles.boldLabel);
             _buildSettings.buildFolder = EditorGUILayout.TextField("Build folder: ", _buildSettings.buildFolder);
             _buildSettings.buildName = EditorGUILayout.TextField("Exe name: ", _buildSettings.buildName);
@@ -57,6 +56,21 @@ namespace Repositories.BuildTool.Editor
             {
                 Run();
             }
+
+            if (GUILayout.Button("Open"))
+            {
+                Open();
+            }
+        }
+
+        private void Open()
+        {
+            if (string.IsNullOrEmpty(_buildSettings.buildFolder))
+            {
+                return;
+            }
+
+            Process.Start("explorer.exe", _buildSettings.buildFolder);
         }
 
         private void Run()
@@ -180,8 +194,9 @@ namespace Repositories.BuildTool.Editor
                     Repaint();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Debug.LogError(e.Message);
             }
         }
 
