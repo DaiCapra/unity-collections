@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace SortComponents.SortComponents.Editor
+namespace SortComponents.Editor
 {
     public static class SortComponents
     {

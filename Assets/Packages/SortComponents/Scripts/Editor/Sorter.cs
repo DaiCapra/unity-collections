@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace SortComponents.SortComponents.Editor
+namespace SortComponents.Editor
 {
     public class Sorter
     {

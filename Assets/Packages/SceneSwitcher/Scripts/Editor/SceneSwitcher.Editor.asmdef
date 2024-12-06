@@ -1,5 +1,5 @@
 {
-    "name": "BuildTool.Editor",
+    "name": "SceneSwitcher.Editor",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [
@@ -7,10 +7,8 @@
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "Newtonsoft.Json.dll"
-    ],
+    "overrideReferences": false,
+    "precompiledReferences": [],
     "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],

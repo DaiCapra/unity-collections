@@ -1,0 +1,14 @@
+{
+    "name": "ProjectShortcuts.Editor",
+    "references": [
+        "ProjectShortcuts"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "optionalUnityReferences": [],
+    "precompiledReferences": [],
+    "defineConstraints": [],
+    "overrideReferences": false,
+    "autoReferenced": false
+}

@@ -4,13 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using CompressionLevel = System.IO.Compression.CompressionLevel;
 using Debug = UnityEngine.Debug;
 
-namespace Repositories.BuildTool.Editor
+namespace BuildTool.Editor
 {
     public class BuildTool : EditorWindow
     {

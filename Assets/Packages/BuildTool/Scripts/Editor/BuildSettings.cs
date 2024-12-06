@@ -1,4 +1,4 @@
-﻿namespace Repositories.BuildTool.Editor
+﻿namespace BuildTool.Editor
 {
     public class BuildSettings
     {

@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements"
+             xmlns:editor="UnityEditor.UIElements"
+             noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Container"
+                          style="flex-grow: 1; padding-top: 8px; padding-right: 8px; padding-bottom: 8px; padding-left: 8px;">
+        <engine:Label text="Root folder" />
+        <engine:TextField placeholder-text="Select a root folder..." name="currentFolderField" readonly="true" />
+        <engine:Label text="Name" />
+        <engine:TextField placeholder-text="Asmdef root name..." name="rootNameField" />
+        <engine:Toggle label="Runtime&#10;" name="toggleRuntime" />
+        <engine:Toggle label="Editor&#10;" name="toggleEditor" />
+        <engine:Toggle label="Editor Tests&#10;" name="toggleEditorTests" />
+        <engine:Toggle label="Play Tests&#10;" name="togglePlayTests" />
+        <engine:Label name="outputLabel" />
+        <engine:Button text="Generate" name="generateButton" />
+    </engine:VisualElement>
+</engine:UXML>
