@@ -19,9 +19,9 @@ namespace Repositories.BuildTool.Editor
             Formatting = Formatting.Indented
         };
 
-        private BuildSettings _buildSettings;
+        private readonly string _settingsPath = Path.Combine(Application.dataPath, "build-tool.json");
 
-        private readonly string _settingsPath = Path.Combine(Application.dataPath, "build-settings.json");
+        private BuildSettings _buildSettings;
 
         public void OnGUI()
         {
@@ -32,6 +32,7 @@ namespace Repositories.BuildTool.Editor
             }
 
             GUILayout.Label("Build tools", EditorStyles.boldLabel);
+            _buildSettings.productName = EditorGUILayout.TextField("Name: ", _buildSettings.productName);
             _buildSettings.buildFolder = EditorGUILayout.TextField("Build folder: ", _buildSettings.buildFolder);
             _buildSettings.buildName = EditorGUILayout.TextField("Exe name: ", _buildSettings.buildName);
             _buildSettings.version = EditorGUILayout.TextField("Version: ", _buildSettings.version);
@@ -102,29 +103,19 @@ namespace Repositories.BuildTool.Editor
         private void Package()
         {
             ZipGameFiles();
-            WriteManifest();
-        }
-
-        private void WriteManifest()
-        {
-            var manifest = new Manifest() { name = GetZipName(), version = _buildSettings.version };
-
-            var json = JsonConvert.SerializeObject(manifest, _settings);
-
-            var path = Path.Combine(GetBuildFolder(), "manifest.json");
-            File.WriteAllText(path, json);
+            // WriteManifest();
         }
 
         private void ZipGameFiles()
         {
             var zipName = GetZipName();
-            var dir = GetBuildFolder();
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
+            // var dir = GetBuildFolder();
+            // if (!Directory.Exists(dir))
+            // {
+            //     Directory.CreateDirectory(dir);
+            // }
 
-            var zipPath = Path.Combine(dir, zipName);
+            var zipPath = Path.Combine(_buildSettings.buildFolder, zipName);
             if (File.Exists(zipPath))
             {
                 File.Delete(zipPath);
@@ -136,11 +127,6 @@ namespace Repositories.BuildTool.Editor
                 zipPath,
                 CompressionLevel.Optimal,
                 includeBaseDirectory: false);
-        }
-
-        private string GetBuildFolder()
-        {
-            return Path.Combine(_buildSettings.buildFolder, $"build-{_buildSettings.version}");
         }
 
         private string GetZipName()
@@ -191,6 +177,12 @@ namespace Repositories.BuildTool.Editor
                 {
                     var text = File.ReadAllText(_settingsPath);
                     _buildSettings = JsonConvert.DeserializeObject<BuildSettings>(text);
+
+                    if (string.IsNullOrEmpty(_buildSettings.productName))
+                    {
+                        _buildSettings.productName = PlayerSettings.productName;
+                    }
+
                     Repaint();
                 }
             }
@@ -203,7 +195,7 @@ namespace Repositories.BuildTool.Editor
         private void Save()
         {
             PlayerSettings.bundleVersion = _buildSettings.version;
-
+            PlayerSettings.productName = _buildSettings.productName;
             var json = JsonConvert.SerializeObject(_buildSettings, _settings);
             File.WriteAllText(_settingsPath, json);
         }

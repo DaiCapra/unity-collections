@@ -1,5 +1,6 @@
 {
   "buildFolder": "Build",
   "buildName": "Game",
-  "version": "1.0.1"
+  "productName": "MyGame",
+  "version": "1.0.8"
 }
