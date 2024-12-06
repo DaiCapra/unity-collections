@@ -50,7 +50,7 @@ namespace AsmdefTool.Editor
             {
                 AssetDatabase.Refresh();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // ignored
             }

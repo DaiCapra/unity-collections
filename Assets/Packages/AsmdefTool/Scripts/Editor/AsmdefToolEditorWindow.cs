@@ -1,42 +1,53 @@
 using Unity.Properties;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AsmdefTool.Editor
 {
     public class AsmdefToolEditorWindow : EditorWindow
     {
-        [SerializeField] private VisualTreeAsset visualTreeAsset;
+        public VisualTreeAsset visualTreeAsset;
+        public string selection = string.Empty;
+        public string rootName = string.Empty;
+        public bool runtime;
+        public bool editor;
+        public bool editorTests;
+        public bool playTests;
 
-        private string Selection { get; set; } = string.Empty;
-        private string RootName { get; set; } = string.Empty;
-        private bool Runtime { get; set; }
-        private bool Editor { get; set; }
-        private bool EditorTests { get; set; }
-        private bool PlayTests { get; set; }
+        public string outputText = string.Empty;
+        public string foo;
 
         public void CreateGUI()
         {
             visualTreeAsset.CloneTree(rootVisualElement);
 
             var currentFolderField = rootVisualElement.Q<TextField>("currentFolderField");
-            // Bind(currentFolderField, this, "value", nameof(Selection));
-
             var rootNameField = rootVisualElement.Q<TextField>("rootNameField");
-            rootNameField.dataSource = this;
-            rootNameField.dataSourcePath = new PropertyPath(nameof(RootName));
-            
-            // Bind(rootNameField, this, "value", nameof(RootName));
-            
+
             var toggleRuntime = rootVisualElement.Q<Toggle>("toggleRuntime");
             var toggleEditor = rootVisualElement.Q<Toggle>("toggleEditor");
-            var toggleEditorTest = rootVisualElement.Q<Toggle>("toggleEditorTest");
-            var togglePlayTest = rootVisualElement.Q<Toggle>("togglePlayTest");
+            var toggleEditorTest = rootVisualElement.Q<Toggle>("toggleEditorTests");
+            var togglePlayTest = rootVisualElement.Q<Toggle>("togglePlayTests");
 
             var outputLabel = rootVisualElement.Q<Label>("outputLabel");
             var generateButton = rootVisualElement.Q<Button>("generateButton");
+
+            Bind(currentFolderField, this, nameof(FloatField.value), nameof(selection));
+            Bind(rootNameField, this, nameof(FloatField.value), nameof(rootName));
+
+            Bind(toggleRuntime, this, nameof(Toggle.value), nameof(runtime));
+            Bind(toggleEditor, this, nameof(Toggle.value), nameof(editor));
+            Bind(toggleEditorTest, this, nameof(Toggle.value), nameof(editorTests));
+            Bind(togglePlayTest, this, nameof(Toggle.value), nameof(playTests));
+
+            Bind(outputLabel, this, nameof(Label.text), nameof(outputText));
+            generateButton.clickable = new Clickable(OnGenerate);
+        }
+
+        private void OnGenerate()
+        {
         }
 
         [MenuItem("Tools/Asmdef Tool")]
@@ -56,10 +67,12 @@ namespace AsmdefTool.Editor
         {
             visualElement.dataSource = source;
             visualElement.dataSourcePath = new PropertyPath(path);
-            visualElement.SetBinding(propertyName, new DataBinding()
+            var binding = new DataBinding()
             {
-                bindingMode = BindingMode.TwoWay
-            });
+                bindingMode = mode
+            };
+
+            visualElement.SetBinding(propertyName, binding);
         }
     }
 }
