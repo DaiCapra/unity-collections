@@ -2,8 +2,11 @@
 ### Build Tool
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/BuildTool
 
-### Sort Components
-https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/SortComponents
+### Compile Time Debug
+https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/CompileTimeDebug
+
+### Poisson Disk Sampler
+https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/PoissonDiskSampler
 
 ### Project Shortcuts
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/ProjectShortcuts
@@ -11,5 +14,6 @@ https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/ProjectSh
 ### Scene Switcher
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/SceneSwitcher
 
-### Compile Time Debug
-https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/CompileTimeDebug
+### Sort Components
+https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/SortComponents
+
