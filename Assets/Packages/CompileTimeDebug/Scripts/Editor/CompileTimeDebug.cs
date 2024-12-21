@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-namespace CompileDebug.Editor
+namespace CompileTimeDebug.Scripts.Editor
 {
     [InitializeOnLoad]
     public class CompileTimeDebug

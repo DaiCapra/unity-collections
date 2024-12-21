@@ -5,6 +5,9 @@ https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/BuildTool
 ### Compile Time Debug
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/CompileTimeDebug
 
+### Generation Maps
+https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/GenerationMaps
+
 ### Poisson Disk Sampler
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/PoissonDiskSampler
 

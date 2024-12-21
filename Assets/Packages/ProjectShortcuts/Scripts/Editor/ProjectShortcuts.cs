@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace ProjectShortcuts.Editor
+namespace ProjectShortcuts.Scripts.Editor
 {
     public class ProjectShortcuts
     {

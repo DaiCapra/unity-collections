@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace ProjectShortcuts.Editor
+namespace ProjectShortcuts.Scripts.Editor
 {
     public class ProjectShortcutsWindow : EditorWindow
     {
