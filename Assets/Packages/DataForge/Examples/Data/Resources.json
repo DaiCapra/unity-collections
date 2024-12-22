@@ -1,0 +1,10 @@
+[
+  {
+    "key": "tree",
+    "resources": [
+      "P_Tree_A.prefab",
+      "P_Tree_B.prefab"
+    ],
+    "amount": 100
+  }
+]

@@ -62,7 +62,6 @@ MonoBehaviour:
       - rid: 2444649349646647301
       - rid: 2444649349646647303
       - rid: 2444649349646647305
-      - rid: 2444649349646647306
       - rid: 2444649349646647308
       - rid: 2444649349646647313
       - rid: 2444649349646647316
@@ -96,6 +95,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2396546144784351310
       type: {class: Renderer2DResources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:

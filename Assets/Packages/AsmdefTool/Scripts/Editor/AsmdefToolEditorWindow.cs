@@ -1,7 +1,6 @@
 using Unity.Properties;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AsmdefTool.Editor

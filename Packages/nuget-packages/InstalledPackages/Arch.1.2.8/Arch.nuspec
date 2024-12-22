@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Arch</id>
+    <version>1.2.8</version>
+    <title>Arch</title>
+    <authors>genaray</authors>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <projectUrl>https://github.com/genaray/Arch</projectUrl>
+    <description>A high performance c# net.6 and net.7 archetype based ECS ( Entity component system ).</description>
+    <releaseNotes>Updated LowLevel which fixes bugs. 
+Fixed issue where Unsafe.As did not work on .Net 2.1 for the Dangerous-Utils.
+Dangerous API now allows setting/getting of recycled ids.
+Fixed archetype duplication after loading a save.
+Fixed .Add when a newly non registered component was added. 
+Now makes use of the updated and improved JobScheduler 1.1.2.
+ScheduleParallelInlineQuery added.
+Added World.IsAlive(EntityReference);
+Fixed bug where `World.TrimExcess` does not trim Recycled-Entities which results in an out of bounds exception sooner or later.
+Fixed bug in JobScheduler which prevents a deadlock.
+Moved CommandBuffer to Buffer namespace, might break references.
+CommandBuffer now accepts a world during playback, world in ctor was removed.
+CommandBuffer now triggers OnComponentRemoved events.</releaseNotes>
+    <copyright>Apache2.0</copyright>
+    <tags>c# .net .net6 .net7 ecs game entity gamedev game-development game-engine entity-component-system stride unity godot</tags>
+    <repository type="git" url="https://github.com/genaray/Arch.git" commit="7b676530327a96dd65d0d463b7da0638e46d7827" />
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Arch.LowLevel" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="Collections.Pooled" version="2.0.0-preview.27" exclude="Build,Analyzers" />
+        <dependency id="CommunityToolkit.HighPerformance" version="7.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="ZeroAllocJobScheduler" version="1.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net7.0">
+        <dependency id="Arch.LowLevel" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="Collections.Pooled" version="2.0.0-preview.27" exclude="Build,Analyzers" />
+        <dependency id="CommunityToolkit.HighPerformance" version="7.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="ZeroAllocJobScheduler" version="1.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="Arch.LowLevel" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="Collections.Pooled" version="2.0.0-preview.27" exclude="Build,Analyzers" />
+        <dependency id="CommunityToolkit.HighPerformance" version="7.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="ZeroAllocJobScheduler" version="1.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Arch.LowLevel" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="Collections.Pooled" version="2.0.0-preview.27" exclude="Build,Analyzers" />
+        <dependency id="CommunityToolkit.HighPerformance" version="7.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="ZeroAllocJobScheduler" version="1.1.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

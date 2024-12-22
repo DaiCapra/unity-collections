@@ -6,7 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Packages/DataForge/Examples/Scenes/Test.unity
+    guid: e35d6f20cc141e24fbb727b60f046db7
+  - enabled: 1
     path: Assets/Scenes/Empty.unity
     guid: 50a9e6f116c07a54ea56d369235f284b
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 85a7aedc0ad21344689cc3faa9af464a,
+      type: 2}
   m_UseUCBPForAssetBundles: 0
