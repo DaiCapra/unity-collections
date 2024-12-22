@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace PoissonDiskSampler.Runtime
+namespace PoissonDiskSampling.Runtime
 {
     public static class PoissonDiskSampler
     {
@@ -20,7 +20,7 @@ namespace PoissonDiskSampler.Runtime
             {
                 throw new Exception("Radius must be greater than 0");
             }
-            
+
             // Size of each grid cell
             var cellSize = radius / Mathf.Sqrt(2);
             var gridWidth = Mathf.CeilToInt(width / cellSize);

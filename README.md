@@ -8,8 +8,8 @@ https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/CompileTi
 ### Generation Maps
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/GenerationMaps
 
-### Poisson Disk Sampler
-https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/PoissonDiskSampler
+### Poisson Disk Sampling
+https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/PoissonDiskSampling
 
 ### Project Shortcuts
 https://github.com/DaiCapra/unity-collections.git?path=Assets/Packages/ProjectShortcuts
