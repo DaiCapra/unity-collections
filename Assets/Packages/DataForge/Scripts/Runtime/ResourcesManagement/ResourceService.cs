@@ -26,7 +26,7 @@ namespace DataForge.ResourcesManagement
             var prefabs = blueprint.prefabs;
             var index = Math.Clamp(reference.prefabIndex, 0, prefabs.Length);
             var key = prefabs.ElementAtOrDefault(index);
-            
+
             if (string.IsNullOrEmpty(key))
             {
                 Debug.LogError($"Key cannot be null or empty!");
@@ -46,6 +46,16 @@ namespace DataForge.ResourcesManagement
             }
 
             return g;
+        }
+
+        public GameObject GetPrefab(string key)
+        {
+            if (!Resources.TryGetValue(key, out Object obj))
+            {
+                Debug.LogError($"Key {key} not found!");
+            }
+
+            return obj as GameObject;
         }
 
         public async Task Load(string label)
