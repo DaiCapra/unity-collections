@@ -182,11 +182,13 @@ namespace DataForge.Entities
                 return;
             }
 
-            var key = blueprint.prefabs.ElementAtOrDefault(reference.prefabIndex);
-            var prefab = _resourceProvider.GetPrefab(key);
+            RandomizePrefab(entity, blueprint, ref reference);
+
+            var prefab = _resourceProvider.GetPrefab(blueprint, reference);
             if (prefab == null)
             {
                 Debug.LogError($"Entity {entity} has no prefab!");
+                return;
             }
 
             var transform = entity.GetOrDefault<STransform>();
@@ -199,6 +201,11 @@ namespace DataForge.Entities
                 rotation: rotation,
                 entity: entity
             );
+
+            if (gameObject == null)
+            {
+                return;
+            }
 
             Actors[entity] = gameObject.GetComponent<Actor>();
         }
@@ -273,6 +280,17 @@ namespace DataForge.Entities
                 {
                     processor.Process(entity);
                 }
+            }
+        }
+
+        private void RandomizePrefab(Entity entity,
+            Blueprint blueprint,
+            ref BlueprintReference reference)
+        {
+            if (!reference.prefabIndex.isSet)
+            {
+                reference.prefabIndex = UnityEngine.Random.Range(0, blueprint.prefabs.Length);
+                entity.Set(reference);
             }
         }
     }

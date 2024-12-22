@@ -66,7 +66,7 @@ namespace DataForge.Tests
 
             var blueprintManager = new BlueprintManager(resourceManager);
             blueprintManager.Load<ResourceBlueprint>("Resources");
-            
+
             var objectManager = new ObjectManager();
 
             _em = new EntityManager(resourceManager, blueprintManager, objectManager);

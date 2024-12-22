@@ -18,7 +18,6 @@ namespace DataForge.Tests
             var resources = _resourceManager.Resources;
 
             Assert.That(resources.Count, Is.GreaterThan(0));
-            Debug.Log($"Resources: {resources.Count}");
         }
 
         [SetUp]

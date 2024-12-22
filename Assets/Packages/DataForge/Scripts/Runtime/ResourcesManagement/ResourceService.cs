@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataForge.Blueprints;
+using DataForge.Data;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,14 +14,14 @@ namespace DataForge.ResourcesManagement
 {
     public class ResourceManager : IResourceProvider
     {
-        public ResourceManager()
-        {
-        }
-
         public Dictionary<string, Object> Resources { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-        public GameObject GetPrefab(string key)
+        public GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference)
         {
+            var prefabs = blueprint.prefabs;
+            var index = Math.Clamp(reference.prefabIndex, 0, prefabs.Length);
+            var key = prefabs.ElementAtOrDefault(index);
+            
             if (string.IsNullOrEmpty(key))
             {
                 Debug.LogError($"Key cannot be null or empty!");
