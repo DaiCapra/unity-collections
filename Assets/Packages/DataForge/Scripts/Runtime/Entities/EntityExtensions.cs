@@ -48,12 +48,25 @@ namespace DataForge.Entities
 
             return entity.Get<BlueprintReference>().blueprint;
         }
-        
+
+        public static string GetName(this Entity entity)
+        {
+            var id = entity.Get<Identifier>().Id;
+            return $"Entity {id}";
+        }
+
         public static string GetBlueprintId(this Entity entity)
         {
             return entity.Has<BlueprintReference>()
                 ? entity.Get<BlueprintReference>().blueprintId
                 : null;
+        }
+
+        public static void SetPosition(this Entity entity, Vector3 position)
+        {
+            var transform = entity.Get<STransform>();
+            transform.position = position;
+            entity.Set(transform);
         }
 
         public static ulong GetId(this Entity entity)

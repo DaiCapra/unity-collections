@@ -5,6 +5,11 @@
         private T _value;
         public bool isSet;
 
+        public override string ToString()
+        {
+            return $"value: {_value}: set: {isSet}";
+        }
+
         public static implicit operator bool(OptionalValue<T> obj)
         {
             return obj.isSet;

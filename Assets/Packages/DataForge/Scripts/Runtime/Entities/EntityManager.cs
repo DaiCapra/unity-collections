@@ -37,7 +37,7 @@ namespace DataForge.Entities
 
         public Dictionary<Entity, Actor> Actors { get; set; } = new();
 
-        public ulong Identity { get; set; }
+        public ulong Identity { get; set; } = 1;
         public World CurrentWorld => World.Worlds[0];
 
         public void AddBlueprintProcessor(IBlueprintProcessor processor)
@@ -82,6 +82,7 @@ namespace DataForge.Entities
             ProcessBlueprints(entity, blueprint);
             ProcessComponents(entity);
 
+            EntityEvents.EntityCollectionChanged?.Invoke();
             return entity;
         }
 
@@ -103,6 +104,8 @@ namespace DataForge.Entities
         {
             Despawn(entity);
             CurrentWorld.Destroy(entity);
+
+            EntityEvents.EntityCollectionChanged?.Invoke();
         }
 
         public void DestroyAllEntities()
@@ -116,6 +119,7 @@ namespace DataForge.Entities
             if (world != null)
             {
                 World.Destroy(world);
+                EntityEvents.EntityCollectionChanged?.Invoke();
             }
         }
 
@@ -158,6 +162,7 @@ namespace DataForge.Entities
                     _blueprintProvider.Blueprints.TryGetValue(reference.blueprintId, out var blueprint))
                 {
                     reference.blueprint = blueprint;
+                    entity.Set(reference);
                 }
                 else
                 {
@@ -283,15 +288,22 @@ namespace DataForge.Entities
             }
         }
 
-        private void RandomizePrefab(Entity entity,
+        private void RandomizePrefab(
+            Entity entity,
             Blueprint blueprint,
-            ref BlueprintReference reference)
+            ref BlueprintReference reference
+        )
         {
             if (!reference.prefabIndex.isSet)
             {
                 reference.prefabIndex = UnityEngine.Random.Range(0, blueprint.prefabs.Length);
                 entity.Set(reference);
             }
+        }
+
+        public Entity CreateEmptyEntity()
+        {
+            return CurrentWorld.Create();
         }
     }
 }

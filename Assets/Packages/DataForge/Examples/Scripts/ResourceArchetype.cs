@@ -1,3 +1,4 @@
+using DataForge.Data;
 using DataForge.Entities;
 
 namespace DataForge.Examples
@@ -6,6 +7,7 @@ namespace DataForge.Examples
     {
         public ResourceArchetype()
         {
+            Add<STransform>();
             Add<Resource>();
         }
     }

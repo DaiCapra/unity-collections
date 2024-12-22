@@ -2,7 +2,6 @@
 using DataForge.Blueprints;
 using DataForge.ResourcesManagement;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace DataForge.Tests
 {

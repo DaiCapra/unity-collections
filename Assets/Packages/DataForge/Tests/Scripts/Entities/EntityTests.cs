@@ -7,7 +7,6 @@ using DataForge.Objects;
 using DataForge.ResourcesManagement;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace DataForge.Tests
 {

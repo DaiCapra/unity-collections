@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DataForge.ResourcesManagement;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace DataForge.Tests
 {

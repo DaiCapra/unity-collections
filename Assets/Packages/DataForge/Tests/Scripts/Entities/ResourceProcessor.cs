@@ -1,6 +1,5 @@
 using Arch.Core;
 using Arch.Core.Extensions;
-using DataForge.Blueprints;
 using DataForge.Processors;
 
 namespace DataForge.Tests
