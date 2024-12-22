@@ -1,5 +1,3 @@
-using Arch.Core.Extensions;
-
 namespace DataForge.Data
 {
     public struct STransform

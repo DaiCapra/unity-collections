@@ -85,6 +85,11 @@ namespace DataForge.Entities
             CurrentWorld.Destroy(entity);
         }
 
+        public void DestroyAllEntities()
+        {
+            GetAllEntities().ForEach(Destroy);
+        }
+
         public void DestroyWorld(World world)
         {
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -100,6 +105,16 @@ namespace DataForge.Entities
             {
                 DestroyWorld(world);
             }
+        }
+
+        public List<Entity> GetAllEntities()
+        {
+            var query = new QueryDescription();
+            var list = new List<Entity>();
+
+            CurrentWorld?.GetEntities(in query, list);
+
+            return list;
         }
 
         public void Restore(Entity entity, List<object> components)

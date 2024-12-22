@@ -15,10 +15,23 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 668d06b9a8abd1b40b44db081e9f3fe8
   m_SerializeEntries:
-  - m_GUID: f105e5ac0a9b2f2428a706ab14408f0b
-    m_Address: P_Tree
+  - m_GUID: 6ea274873026808469638f005c5e4a25
+    m_Address: Resources
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc7c3a572a7bdb24ea5eb3902f292082
+    m_Address: Tree_B
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f105e5ac0a9b2f2428a706ab14408f0b
+    m_Address: Tree_A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 24962b7f6bd088d46858d06fadb5f546, type: 2}
