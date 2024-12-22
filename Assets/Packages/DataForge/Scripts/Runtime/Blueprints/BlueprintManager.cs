@@ -8,11 +8,11 @@ namespace DataForge.Blueprints
 {
     public class BlueprintManager
     {
-        private readonly ResourceManager _manager;
+        private readonly ResourceManager _resourceManager;
 
-        public BlueprintManager(ResourceManager manager)
+        public BlueprintManager(ResourceManager resourceManager)
         {
-            _manager = manager;
+            _resourceManager = resourceManager;
         }
 
         public Dictionary<string, Blueprint> Blueprints { get; } = new(StringComparer.OrdinalIgnoreCase);
@@ -22,11 +22,7 @@ namespace DataForge.Blueprints
             Blueprints.Clear();
         }
 
-        public virtual void Load()
-        {
-        }
-
-        public void LoadBlueprints<T>(string key) where T : Blueprint
+        public void Load<T>(string key) where T : Blueprint
         {
             var bps = LoadData<T>(key);
             foreach (var bp in bps)
@@ -43,7 +39,7 @@ namespace DataForge.Blueprints
 
         private T[] LoadData<T>(string key) where T : Blueprint
         {
-            if (!_manager.Resources.TryGetValue(key, out var resource))
+            if (!_resourceManager.Resources.TryGetValue(key, out var resource))
             {
                 Debug.LogError($"Resource not found: {key}");
                 return Array.Empty<T>();

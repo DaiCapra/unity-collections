@@ -14,7 +14,7 @@ namespace DataForge.Tests
         [Test]
         public void CanLoad()
         {
-            _blueprintManager.LoadBlueprints<ResourceBlueprint>("Resources");
+            _blueprintManager.Load<ResourceBlueprint>("Resources");
             Assert.That(_blueprintManager.Blueprints.Count, Is.GreaterThan(0));
 
             var bp = _blueprintManager.Blueprints["tree"];
