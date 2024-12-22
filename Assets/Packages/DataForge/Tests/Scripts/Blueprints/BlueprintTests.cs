@@ -17,6 +17,9 @@ namespace DataForge.Tests
         {
             _blueprintManager.Load<ResourceBlueprint>("Resources");
             Assert.That(_blueprintManager.Blueprints.Count, Is.GreaterThan(0));
+
+            var bp = _blueprintManager.Blueprints["tree"];
+            Assert.NotNull(bp);
         }
 
         [SetUp]

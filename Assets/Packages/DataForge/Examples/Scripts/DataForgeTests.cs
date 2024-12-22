@@ -7,11 +7,11 @@ namespace DataForge.Examples
     {
         private void Start()
         {
-            var em = new EntityManager();
-            em.CreateWorld();
-            
-            em.AddBlueprintProcessor(new ResourceProcessor());
-            var entity = em.Create<ResourceArchetype>();
+            // var em = new EntityManager();
+            // em.CreateWorld();
+            //
+            // em.AddBlueprintProcessor(new ResourceProcessor());
+            // var entity = em.Create<ResourceArchetype>();
         }
 
         private void Update()

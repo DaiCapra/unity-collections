@@ -3,6 +3,7 @@ using Arch.Core;
 using Arch.Core.Extensions;
 using DataForge.Blueprints;
 using DataForge.Data;
+using UnityEngine;
 
 namespace DataForge.Entities
 {
@@ -47,7 +48,7 @@ namespace DataForge.Entities
 
             return entity.Get<BlueprintReference>().blueprint;
         }
-
+        
         public static string GetBlueprintId(this Entity entity)
         {
             return entity.Has<BlueprintReference>()

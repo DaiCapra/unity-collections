@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DataForge.Blueprints
 {
-    public class BlueprintManager
+    public class BlueprintManager : IBlueprintProvider
     {
         private readonly IResourceProvider _provider;
 

@@ -6,7 +6,10 @@ using Arch.Core.Extensions;
 using Arch.Core.Utils;
 using DataForge.Blueprints;
 using DataForge.Data;
+using DataForge.Objects;
 using DataForge.Processors;
+using DataForge.ResourcesManagement;
+using UnityEngine;
 
 namespace DataForge.Entities
 {
@@ -14,14 +17,25 @@ namespace DataForge.Entities
     {
         private readonly Dictionary<Type, Archetype> _archetypes = new();
         private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
+        private readonly IBlueprintProvider _blueprintProvider;
         private readonly List<IComponentProcessor> _componentProcessors = new();
+        private readonly IObjectManager _objectManager;
+        private readonly IResourceProvider _resourceProvider;
 
-        public EntityManager()
+        public EntityManager(
+            IResourceProvider resourceProvider,
+            IBlueprintProvider blueprintProvider,
+            IObjectManager objectManager
+        )
         {
+            _blueprintProvider = blueprintProvider;
+            _resourceProvider = resourceProvider;
+            _objectManager = objectManager;
+
             AddComponentProcessor(new STransformProcessor());
         }
 
-        public Dictionary<Entity, ActorContext> ActorContexts { get; set; } = new();
+        public Dictionary<Entity, Actor> Actors { get; set; } = new();
 
         public ulong Identity { get; set; }
         public World CurrentWorld => World.Worlds[0];
@@ -78,10 +92,16 @@ namespace DataForge.Entities
 
         public void Despawn(Entity entity)
         {
+            if (Actors.TryGetValue(entity, out var actor))
+            {
+                _objectManager.Unmake(actor.gameObject);
+                Actors.Remove(entity);
+            }
         }
 
         public void Destroy(Entity entity)
         {
+            Despawn(entity);
             CurrentWorld.Destroy(entity);
         }
 
@@ -130,10 +150,57 @@ namespace DataForge.Entities
                     entity.Add(component);
                 }
             }
+
+            if (entity.Has<BlueprintReference>())
+            {
+                var reference = entity.Get<BlueprintReference>();
+                if (!string.IsNullOrEmpty(reference.blueprintId) &&
+                    _blueprintProvider.Blueprints.TryGetValue(reference.blueprintId, out var blueprint))
+                {
+                    reference.blueprint = blueprint;
+                }
+                else
+                {
+                    Debug.LogError($"Blueprint {reference.blueprintId} not found: {entity}");
+                }
+            }
         }
 
         public void Spawn(Entity entity)
         {
+            if (!entity.Has<BlueprintReference>())
+            {
+                Debug.LogError("Entity has no BlueprintReference!");
+                return;
+            }
+
+            var reference = entity.Get<BlueprintReference>();
+            var blueprint = entity.GetBlueprint();
+            if (blueprint == null)
+            {
+                Debug.LogError($"Entity {entity} has no blueprint!");
+                return;
+            }
+
+            var key = blueprint.prefabs.ElementAtOrDefault(reference.prefabIndex);
+            var prefab = _resourceProvider.GetPrefab(key);
+            if (prefab == null)
+            {
+                Debug.LogError($"Entity {entity} has no prefab!");
+            }
+
+            var transform = entity.GetOrDefault<STransform>();
+            var position = (Vector3)transform.position;
+            var rotation = (Vector3)transform.rotation;
+
+            var gameObject = _objectManager.Make(
+                prefab,
+                position: position,
+                rotation: rotation,
+                entity: entity
+            );
+
+            Actors[entity] = gameObject.GetComponent<Actor>();
         }
 
         private void AddIdentifier(Entity entity)
@@ -144,7 +211,7 @@ namespace DataForge.Entities
                 Id = id
             };
 
-            entity.Add(identifier);
+            entity.Ensure(identifier);
         }
 
         private Archetype EnsureArchetype(Type archetypeType)
@@ -175,12 +242,12 @@ namespace DataForge.Entities
 
         private void MapBlueprint(Entity entity, Blueprint blueprint)
         {
-            if (blueprint == null || !entity.Has<BlueprintReference>())
+            if (blueprint == null)
             {
                 return;
             }
 
-            entity.Set(new BlueprintReference()
+            entity.Ensure(new BlueprintReference()
             {
                 blueprintId = blueprint.id,
                 blueprint = blueprint

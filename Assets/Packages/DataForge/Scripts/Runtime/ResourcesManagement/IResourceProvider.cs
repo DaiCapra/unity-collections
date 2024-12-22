@@ -6,5 +6,6 @@ namespace DataForge.ResourcesManagement
     public interface IResourceProvider
     {
         Dictionary<string, Object> Resources { get; }
+        GameObject GetPrefab(string key);
     }
 }

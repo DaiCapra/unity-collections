@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
@@ -16,6 +17,29 @@ namespace DataForge.ResourcesManagement
         }
 
         public Dictionary<string, Object> Resources { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        public GameObject GetPrefab(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                Debug.LogError($"Key cannot be null or empty!");
+                return null;
+            }
+
+            if (!Resources.TryGetValue(key, out Object obj))
+            {
+                Debug.LogError($"Key {key} not found!");
+                return null;
+            }
+
+            var g = obj as GameObject;
+            if (g == null)
+            {
+                Debug.LogError($"Key {key} is not a GameObject!");
+            }
+
+            return g;
+        }
 
         public void Clear()
         {

@@ -1,6 +1,10 @@
-﻿using Arch.Core.Extensions;
+﻿using System.Threading.Tasks;
+using Arch.Core.Extensions;
+using DataForge.Blueprints;
 using DataForge.Data;
 using DataForge.Entities;
+using DataForge.Objects;
+using DataForge.ResourcesManagement;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
@@ -9,6 +13,8 @@ namespace DataForge.Tests
 {
     public class EntityTests
     {
+        private const string DefaultLabel = "default";
+
         private EntityManager _em;
         private ResourceBlueprint _treeBlueprint;
 
@@ -45,19 +51,29 @@ namespace DataForge.Tests
             Assert.That(transform.scale, Is.EqualTo(SVector3.One));
         }
 
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void CanSpawn()
         {
-            _em = new EntityManager();
-            _em.AddBlueprintProcessor(new ResourceProcessor());
+            var entity = _em.Create<ResourceArchetype>(blueprint: _treeBlueprint);
+            _em.Spawn(entity);
+        }
 
+        [SetUp]
+        public async Task Setup()
+        {
+            var resourceManager = new ResourceManager();
+            await resourceManager.Load(DefaultLabel);
+
+            var blueprintManager = new BlueprintManager(resourceManager);
+            blueprintManager.Load<ResourceBlueprint>("Resources");
+            
+            var objectManager = new ObjectManager();
+
+            _em = new EntityManager(resourceManager, blueprintManager, objectManager);
+            _em.AddBlueprintProcessor(new ResourceProcessor());
             _em.CreateWorld();
 
-            _treeBlueprint = new ResourceBlueprint()
-            {
-                id = "tree",
-                amount = 100
-            };
+            _treeBlueprint = blueprintManager.Blueprints["Tree"] as ResourceBlueprint;
         }
 
         [TearDown]

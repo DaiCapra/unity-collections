@@ -1,9 +1,9 @@
 [
   {
     "id": "tree",
-    "resources": [
-      "P_Tree_A.prefab",
-      "P_Tree_B.prefab"
+    "prefabs": [
+      "Tree_A",
+      "Tree_B"
     ],
     "amount": 100
   }
