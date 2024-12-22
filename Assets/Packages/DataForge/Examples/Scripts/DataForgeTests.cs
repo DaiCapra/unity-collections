@@ -19,7 +19,7 @@ namespace DataForge.Examples
             await resourceManager.Load("default");
 
             var blueprintManager = new BlueprintManager(resourceManager);
-            blueprintManager.Load<ResourceBlueprint>("Resources");
+            blueprintManager.LoadBlueprints<ResourceBlueprint>("Resources");
             var treeBlueprint = blueprintManager.Blueprints["Tree"] as ResourceBlueprint;
 
             var objectManager = new ObjectManager();

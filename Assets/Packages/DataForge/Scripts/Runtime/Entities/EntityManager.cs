@@ -17,19 +17,19 @@ namespace DataForge.Entities
     {
         private readonly Dictionary<Type, Archetype> _archetypes = new();
         private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
-        private readonly IBlueprintProvider _blueprintProvider;
+        private readonly IBlueprintManager _blueprintManager;
         private readonly List<IComponentProcessor> _componentProcessors = new();
         private readonly IObjectManager _objectManager;
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResourceManager _resourceManager;
 
         public EntityManager(
-            IResourceProvider resourceProvider,
-            IBlueprintProvider blueprintProvider,
+            IResourceManager resourceManager,
+            IBlueprintManager blueprintManager,
             IObjectManager objectManager
         )
         {
-            _blueprintProvider = blueprintProvider;
-            _resourceProvider = resourceProvider;
+            _blueprintManager = blueprintManager;
+            _resourceManager = resourceManager;
             _objectManager = objectManager;
 
             AddComponentProcessor(new STransformProcessor());
@@ -159,7 +159,7 @@ namespace DataForge.Entities
             {
                 var reference = entity.Get<BlueprintReference>();
                 if (!string.IsNullOrEmpty(reference.blueprintId) &&
-                    _blueprintProvider.Blueprints.TryGetValue(reference.blueprintId, out var blueprint))
+                    _blueprintManager.Blueprints.TryGetValue(reference.blueprintId, out var blueprint))
                 {
                     reference.blueprint = blueprint;
                     entity.Set(reference);
@@ -189,7 +189,7 @@ namespace DataForge.Entities
 
             RandomizePrefab(entity, blueprint, ref reference);
 
-            var prefab = _resourceProvider.GetPrefab(blueprint, reference);
+            var prefab = _resourceManager.GetPrefab(blueprint, reference);
             if (prefab == null)
             {
                 Debug.LogError($"Entity {entity} has no prefab!");

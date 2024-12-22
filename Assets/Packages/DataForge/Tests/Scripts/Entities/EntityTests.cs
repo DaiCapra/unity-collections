@@ -64,7 +64,7 @@ namespace DataForge.Tests
             await resourceManager.Load(DefaultLabel);
 
             var blueprintManager = new BlueprintManager(resourceManager);
-            blueprintManager.Load<ResourceBlueprint>("Resources");
+            blueprintManager.LoadBlueprints<ResourceBlueprint>("Resources");
 
             var objectManager = new ObjectManager();
 
