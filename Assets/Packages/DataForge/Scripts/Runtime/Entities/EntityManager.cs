@@ -17,15 +17,15 @@ namespace DataForge.Entities
     {
         private readonly Dictionary<Type, Archetype> _archetypes = new();
         private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
-        private readonly IBlueprintManager _blueprintManager;
+        private readonly BlueprintManager _blueprintManager;
         private readonly List<IComponentProcessor> _componentProcessors = new();
-        private readonly IObjectManager _objectManager;
-        private readonly IResourceManager _resourceManager;
+        private readonly ObjectManager _objectManager;
+        private readonly ResourceManager _resourceManager;
 
         public EntityManager(
-            IResourceManager resourceManager,
-            IBlueprintManager blueprintManager,
-            IObjectManager objectManager
+            ResourceManager resourceManager,
+            BlueprintManager blueprintManager,
+            ObjectManager objectManager
         )
         {
             _blueprintManager = blueprintManager;

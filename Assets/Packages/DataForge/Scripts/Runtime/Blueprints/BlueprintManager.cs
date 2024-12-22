@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace DataForge.Blueprints
 {
-    public class BlueprintManager : IBlueprintManager
+    public class BlueprintManager
     {
-        private readonly IResourceManager _manager;
+        private readonly ResourceManager _manager;
 
-        public BlueprintManager(IResourceManager manager)
+        public BlueprintManager(ResourceManager manager)
         {
             _manager = manager;
         }

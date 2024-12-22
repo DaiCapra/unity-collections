@@ -12,9 +12,14 @@ using Object = UnityEngine.Object;
 
 namespace DataForge.ResourcesManagement
 {
-    public class ResourceManager : IResourceManager
+    public class ResourceManager
     {
         public Dictionary<string, Object> Resources { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        public void Clear()
+        {
+            Resources.Clear();
+        }
 
         public GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference)
         {
@@ -41,11 +46,6 @@ namespace DataForge.ResourcesManagement
             }
 
             return g;
-        }
-
-        public void Clear()
-        {
-            Resources.Clear();
         }
 
         public async Task Load(string label)
