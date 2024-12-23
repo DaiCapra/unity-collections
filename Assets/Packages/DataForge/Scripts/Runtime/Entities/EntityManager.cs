@@ -112,7 +112,7 @@ namespace DataForge.Entities
         {
             if (Actors.TryGetValue(entity, out var actor))
             {
-                _objectManager.Unmake(actor.gameObject);
+                _objectManager.Unmake(actor?.gameObject);
                 Actors.Remove(entity);
             }
 
