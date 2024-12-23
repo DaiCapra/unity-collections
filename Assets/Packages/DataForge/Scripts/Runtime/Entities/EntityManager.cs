@@ -112,7 +112,7 @@ namespace DataForge.Entities
         {
             if (Actors.TryGetValue(entity, out var actor))
             {
-                _objectManager.Unmake(actor?.gameObject);
+                _objectManager?.Unmake(actor?.gameObject);
                 Actors.Remove(entity);
             }
 
@@ -133,6 +133,7 @@ namespace DataForge.Entities
         public void DestroyAllEntities()
         {
             GetAllEntities().ForEach(Destroy);
+            Actors.Clear();
         }
 
         public void DestroyWorld(World world)
