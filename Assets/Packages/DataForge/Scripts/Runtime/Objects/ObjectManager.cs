@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DataForge.Objects
 {
-    public class ObjectManager
+    public class ObjectManager: IObjectManager
     {
         public GameObject Make(
             GameObject prefab,

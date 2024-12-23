@@ -19,13 +19,13 @@ namespace DataForge.Entities
         private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
         private readonly BlueprintManager _blueprintManager;
         private readonly List<IComponentProcessor> _componentProcessors = new();
-        private readonly ObjectManager _objectManager;
+        private readonly IObjectManager _objectManager;
         private readonly ResourceManager _resourceManager;
 
         public EntityManager(
             ResourceManager resourceManager,
             BlueprintManager blueprintManager,
-            ObjectManager objectManager
+            IObjectManager objectManager
         )
         {
             _blueprintManager = blueprintManager;
