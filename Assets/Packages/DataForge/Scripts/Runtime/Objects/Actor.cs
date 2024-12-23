@@ -5,6 +5,6 @@ namespace DataForge.Objects
 {
     public class Actor : MonoBehaviour
     {
-        public Entity entity;
+        public Entity entity = Entity.Null;
     }
 }
