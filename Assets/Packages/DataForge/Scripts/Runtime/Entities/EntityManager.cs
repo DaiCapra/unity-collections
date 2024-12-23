@@ -13,11 +13,17 @@ using UnityEngine;
 
 namespace DataForge.Entities
 {
+    public class EntityData
+    {
+        public List<object> components = new();
+        public ulong id;
+    }
+
     public class EntityManager
     {
         private readonly Dictionary<Type, Archetype> _archetypes = new();
-        private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
         private readonly BlueprintManager _blueprintManager;
+        private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
         private readonly List<IComponentProcessor> _componentProcessors = new();
         private readonly IObjectManager _objectManager;
         private readonly ResourceManager _resourceManager;
@@ -50,13 +56,19 @@ namespace DataForge.Entities
             _componentProcessors.Add(processor);
         }
 
-        public List<object> Backup(Entity entity)
+        public EntityData Backup(Entity entity)
         {
             var components = entity.GetAllComponents()
                 .Where(t => t is not ITransientData)
                 .ToList();
 
-            return components;
+            var data = new EntityData
+            {
+                components = components,
+                id = entity.GetId()
+            };
+
+            return data;
         }
 
         public Entity Create<T>(Blueprint blueprint = null) where T : Archetype
@@ -86,6 +98,11 @@ namespace DataForge.Entities
             return entity;
         }
 
+        public Entity CreateEmptyEntity()
+        {
+            return CurrentWorld.Create();
+        }
+
         public void CreateWorld()
         {
             World.Create();
@@ -97,6 +114,11 @@ namespace DataForge.Entities
             {
                 _objectManager.Unmake(actor.gameObject);
                 Actors.Remove(entity);
+            }
+
+            if (entity.Has<Spawned>())
+            {
+                entity.Remove<Spawned>();
             }
         }
 
@@ -141,9 +163,9 @@ namespace DataForge.Entities
             return list;
         }
 
-        public void Restore(Entity entity, List<object> components)
+        public void Restore(Entity entity, EntityData data)
         {
-            foreach (var component in components)
+            foreach (var component in data.components)
             {
                 if (entity.Has(typeof(object)))
                 {
@@ -210,6 +232,11 @@ namespace DataForge.Entities
             if (gameObject == null)
             {
                 return;
+            }
+
+            if (!entity.Has<Spawned>())
+            {
+                entity.Add<Spawned>();
             }
 
             Actors[entity] = gameObject.GetComponent<Actor>();
@@ -299,11 +326,6 @@ namespace DataForge.Entities
                 reference.prefabIndex = UnityEngine.Random.Range(0, blueprint.prefabs.Length);
                 entity.Set(reference);
             }
-        }
-
-        public Entity CreateEmptyEntity()
-        {
-            return CurrentWorld.Create();
         }
     }
 }
