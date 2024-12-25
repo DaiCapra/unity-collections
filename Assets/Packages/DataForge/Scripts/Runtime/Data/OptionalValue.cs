@@ -1,9 +1,12 @@
-﻿namespace DataForge.Data
+﻿using Newtonsoft.Json;
+
+namespace DataForge.Data
 {
     public struct OptionalValue<T> where T : new()
     {
         private T _value;
         public bool isSet;
+        [JsonIgnore] public T Value => _value;
 
         public override string ToString()
         {
