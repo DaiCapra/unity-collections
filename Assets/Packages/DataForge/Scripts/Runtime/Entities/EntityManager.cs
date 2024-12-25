@@ -13,37 +13,32 @@ using UnityEngine;
 
 namespace DataForge.Entities
 {
-    public class EntityData
-    {
-        public List<object> components = new();
-        public ulong id;
-    }
-
     public class EntityManager
     {
         private readonly Dictionary<Type, Archetype> _archetypes = new();
         private readonly BlueprintManager _blueprintManager;
         private readonly List<IBlueprintProcessor> _blueprintProcessors = new();
         private readonly List<IComponentProcessor> _componentProcessors = new();
+        private readonly IEntityDataService _entityDataService;
         private readonly IObjectManager _objectManager;
         private readonly ResourceManager _resourceManager;
 
         public EntityManager(
             ResourceManager resourceManager,
             BlueprintManager blueprintManager,
-            IObjectManager objectManager
+            IObjectManager objectManager,
+            IEntityDataService entityDataService
         )
         {
             _blueprintManager = blueprintManager;
             _resourceManager = resourceManager;
             _objectManager = objectManager;
+            _entityDataService = entityDataService;
 
             AddComponentProcessor(new STransformProcessor());
         }
 
         public Dictionary<Entity, Actor> Actors { get; set; } = new();
-
-        public ulong Identity { get; set; } = 1;
         public World CurrentWorld => World.Worlds[0];
 
         public void AddBlueprintProcessor(IBlueprintProcessor processor)
@@ -94,6 +89,7 @@ namespace DataForge.Entities
             ProcessBlueprints(entity, blueprint);
             ProcessComponents(entity);
 
+            _entityDataService.Entities[entity.GetId()] = entity;
             EntityEvents.EntityCollectionChanged?.Invoke();
             return entity;
         }
@@ -125,7 +121,9 @@ namespace DataForge.Entities
         public void Destroy(Entity entity)
         {
             Despawn(entity);
+
             CurrentWorld.Destroy(entity);
+            _entityDataService.Entities.Remove(entity.GetId());
 
             EntityEvents.EntityCollectionChanged?.Invoke();
         }
@@ -134,6 +132,7 @@ namespace DataForge.Entities
         {
             GetAllEntities().ForEach(Destroy);
             Actors.Clear();
+            _entityDataService.Entities.Clear();
         }
 
         public void DestroyWorld(World world)
@@ -142,6 +141,8 @@ namespace DataForge.Entities
             if (world != null)
             {
                 World.Destroy(world);
+                _entityDataService.Entities.Clear();
+                
                 EntityEvents.EntityCollectionChanged?.Invoke();
             }
         }
@@ -191,6 +192,11 @@ namespace DataForge.Entities
                 {
                     Debug.LogError($"Blueprint {reference.blueprintId} not found: {entity}");
                 }
+            }
+
+            if (entity.Has<Identifier>())
+            {
+                _entityDataService.Entities[entity.GetId()] = entity;
             }
         }
 
@@ -246,7 +252,7 @@ namespace DataForge.Entities
 
         private void AddIdentifier(Entity entity)
         {
-            var id = Identity++;
+            var id = _entityDataService.EntityIdentifier++;
             var identifier = new Identifier
             {
                 Id = id

@@ -68,7 +68,7 @@ namespace DataForge.Tests
 
             var objectManager = new ObjectManager();
 
-            _em = new EntityManager(resourceManager, blueprintManager, objectManager);
+            _em = new EntityManager(resourceManager, blueprintManager, objectManager, new EntityDataService());
             _em.AddBlueprintProcessor(new ResourceProcessor());
             _em.CreateWorld();
 

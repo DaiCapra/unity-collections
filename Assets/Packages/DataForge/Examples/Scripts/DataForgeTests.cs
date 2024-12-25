@@ -6,6 +6,7 @@ using DataForge.Data;
 using DataForge.Entities;
 using DataForge.Objects;
 using DataForge.ResourcesManagement;
+using DataForge.Tests;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace DataForge.Examples
 
             var objectManager = new ObjectManager();
 
-            var em = new EntityManager(resourceManager, blueprintManager, objectManager);
+            var em = new EntityManager(resourceManager, blueprintManager, objectManager, new EntityDataService());
             em.AddBlueprintProcessor(new ResourceProcessor());
             em.CreateWorld();
 
@@ -46,7 +47,7 @@ namespace DataForge.Examples
             };
 
             var json = JsonConvert.SerializeObject(data, settings);
-            var loadedData = JsonConvert.DeserializeObject<EntityData>(json, settings);
+            var loadedData = JsonConvert.DeserializeObject<Entities.EntityData>(json, settings);
 
             var e = em.CreateEmptyEntity();
             em.Restore(e, loadedData);
