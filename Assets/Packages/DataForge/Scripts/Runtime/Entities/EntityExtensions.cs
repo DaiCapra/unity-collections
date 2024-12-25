@@ -68,7 +68,7 @@ namespace DataForge.Entities
             transform.position = position;
             entity.Set(transform);
         }
-        
+
         public static ulong GetId(this Entity entity)
         {
             if (!entity.Has<Identifier>())

@@ -122,15 +122,17 @@ namespace DataForge.Entities
         {
             Despawn(entity);
 
-            CurrentWorld.Destroy(entity);
             _entityDataService.Entities.Remove(entity.GetId());
+            CurrentWorld.Destroy(entity);
 
             EntityEvents.EntityCollectionChanged?.Invoke();
         }
 
         public void DestroyAllEntities()
         {
-            GetAllEntities().ForEach(Destroy);
+            var entities = GetAllEntities();
+            entities.ForEach(Destroy);
+            
             Actors.Clear();
             _entityDataService.Entities.Clear();
         }
