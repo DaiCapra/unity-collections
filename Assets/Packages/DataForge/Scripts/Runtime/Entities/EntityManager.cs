@@ -194,12 +194,12 @@ namespace DataForge.Entities
             }
         }
 
-        public void Spawn(Entity entity)
+        public GameObject Spawn(Entity entity)
         {
             if (!entity.Has<BlueprintReference>())
             {
                 Debug.LogError("Entity has no BlueprintReference!");
-                return;
+                return null;
             }
 
             var reference = entity.Get<BlueprintReference>();
@@ -207,7 +207,7 @@ namespace DataForge.Entities
             if (blueprint == null)
             {
                 Debug.LogError($"Entity {entity} has no blueprint!");
-                return;
+                return null;
             }
 
             RandomizePrefab(entity, blueprint, ref reference);
@@ -216,7 +216,7 @@ namespace DataForge.Entities
             if (prefab == null)
             {
                 Debug.LogError($"Entity {entity} has no prefab!");
-                return;
+                return null;
             }
 
             var transform = entity.GetOrDefault<STransform>();
@@ -232,7 +232,7 @@ namespace DataForge.Entities
 
             if (gameObject == null)
             {
-                return;
+                return null;
             }
 
             if (!entity.Has<Spawned>())
@@ -241,6 +241,7 @@ namespace DataForge.Entities
             }
 
             Actors[entity] = gameObject.GetComponent<Actor>();
+            return gameObject;
         }
 
         private void AddIdentifier(Entity entity)
