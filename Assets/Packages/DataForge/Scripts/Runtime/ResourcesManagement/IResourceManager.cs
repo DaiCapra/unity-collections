@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DataForge.Blueprints;
 using DataForge.Data;
 using UnityEngine;
@@ -9,5 +10,6 @@ namespace DataForge.ResourcesManagement
     {
         GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference);
         Dictionary<string, Object> Resources { get; set; }
+        Task Load(string label);
     }
 }
