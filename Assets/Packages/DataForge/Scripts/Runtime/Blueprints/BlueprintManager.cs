@@ -8,9 +8,9 @@ namespace DataForge.Blueprints
 {
     public class BlueprintManager : IBlueprintManager
     {
-        private readonly ResourceManager _resourceManager;
+        private readonly IResourceManager _resourceManager;
 
-        public BlueprintManager(ResourceManager resourceManager)
+        public BlueprintManager(IResourceManager resourceManager)
         {
             _resourceManager = resourceManager;
         }

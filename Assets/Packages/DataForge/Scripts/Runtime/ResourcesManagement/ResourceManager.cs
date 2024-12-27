@@ -12,14 +12,9 @@ using Object = UnityEngine.Object;
 
 namespace DataForge.ResourcesManagement
 {
-    public class ResourceManager: IResourceManager
+    public class ResourceManager : IResourceManager
     {
-        public Dictionary<string, Object> Resources { get; } = new(StringComparer.OrdinalIgnoreCase);
-
-        public void Clear()
-        {
-            Resources.Clear();
-        }
+        public Dictionary<string, Object> Resources { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
         public GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference)
         {
@@ -46,6 +41,11 @@ namespace DataForge.ResourcesManagement
             }
 
             return g;
+        }
+
+        public void Clear()
+        {
+            Resources.Clear();
         }
 
         public GameObject GetPrefab(string key)
