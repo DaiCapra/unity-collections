@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DataForge.Blueprints
 {
-    public class BlueprintManager
+    public class BlueprintManager : IBlueprintManager
     {
         private readonly ResourceManager _resourceManager;
 
@@ -15,7 +15,7 @@ namespace DataForge.Blueprints
             _resourceManager = resourceManager;
         }
 
-        public Dictionary<string, Blueprint> Blueprints { get; } = new(StringComparer.OrdinalIgnoreCase);
+        public Dictionary<string, Blueprint> Blueprints { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
         public void Clear()
         {

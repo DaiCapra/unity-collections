@@ -12,7 +12,7 @@ using Object = UnityEngine.Object;
 
 namespace DataForge.ResourcesManagement
 {
-    public class ResourceManager
+    public class ResourceManager: IResourceManager
     {
         public Dictionary<string, Object> Resources { get; } = new(StringComparer.OrdinalIgnoreCase);
 
