@@ -8,8 +8,9 @@ namespace DataForge.ResourcesManagement
 {
     public interface IResourceManager
     {
-        GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference);
         Dictionary<string, Object> Resources { get; set; }
+        GameObject GetPrefab(Blueprint blueprint, BlueprintReference reference);
+        GameObject GetPrefab(string key);
         Task Load(string label);
     }
 }
