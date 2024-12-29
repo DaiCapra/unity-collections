@@ -1,0 +1,17 @@
+{
+    "name": "DataForge.Examples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ea7cc78f60e5b684495034f8da3a5540",
+        "GUID:81772be052986a04e8b79ad29b6b878b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
