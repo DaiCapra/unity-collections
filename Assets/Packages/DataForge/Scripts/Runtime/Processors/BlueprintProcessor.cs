@@ -19,6 +19,20 @@ namespace DataForge.Processors
             return blueprint is T;
         }
 
-        protected abstract void OnProcess(Entity entity, T blueprint);
+        public void Restore(Entity entity, Blueprint blueprint)
+        {
+            if (blueprint is T t)
+            {
+                OnRestore(entity, t);
+            }
+        }
+
+        protected virtual void OnProcess(Entity entity, T blueprint)
+        {
+        }
+
+        protected virtual void OnRestore(Entity entity, T blueprint)
+        {
+        }
     }
 }

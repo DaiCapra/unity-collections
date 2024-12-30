@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Packages/DataForge/Examples/Scenes/Test.unity
+    path: Assets/Examples/DataForge/Scenes/Test.unity
     guid: e35d6f20cc141e24fbb727b60f046db7
   - enabled: 1
     path: Assets/Scenes/Empty.unity
