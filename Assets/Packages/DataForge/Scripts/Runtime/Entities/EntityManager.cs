@@ -132,7 +132,7 @@ namespace DataForge.Entities
         {
             var entities = GetAllEntities();
             entities.ForEach(Destroy);
-            
+
             Actors.Clear();
             _entityDataService.Entities.Clear();
         }
@@ -144,7 +144,7 @@ namespace DataForge.Entities
             {
                 World.Destroy(world);
                 _entityDataService.Entities.Clear();
-                
+
                 EntityEvents.EntityCollectionChanged?.Invoke();
             }
         }
@@ -189,6 +189,8 @@ namespace DataForge.Entities
                 {
                     reference.blueprint = blueprint;
                     entity.Set(reference);
+
+                    RestoreBlueprints(entity, blueprint);
                 }
                 else
                 {
@@ -305,24 +307,18 @@ namespace DataForge.Entities
 
         private void ProcessBlueprints(Entity entity, Blueprint blueprint)
         {
-            foreach (var processor in _blueprintProcessors)
-            {
-                if (processor.CanProcess(blueprint))
-                {
-                    processor.Process(entity, blueprint);
-                }
-            }
+            var p = _blueprintProcessors
+                .Where(t => t.CanProcess(blueprint))
+                .ToList();
+            p.ForEach(t => t.Process(entity, blueprint));
         }
 
         private void ProcessComponents(Entity entity)
         {
-            foreach (var processor in _componentProcessors)
-            {
-                if (processor.CanProcess(entity))
-                {
-                    processor.Process(entity);
-                }
-            }
+            var p = _componentProcessors
+                .Where(t => t.CanProcess(entity))
+                .ToList();
+            p.ForEach(t => t.Process(entity));
         }
 
         private void RandomizePrefab(
@@ -336,6 +332,14 @@ namespace DataForge.Entities
                 reference.prefabIndex = UnityEngine.Random.Range(0, blueprint.prefabs.Length);
                 entity.Set(reference);
             }
+        }
+
+        private void RestoreBlueprints(Entity entity, Blueprint blueprint)
+        {
+            var p = _blueprintProcessors
+                .Where(t => t.CanProcess(blueprint))
+                .ToList();
+            p.ForEach(t => t.Restore(entity, blueprint));
         }
     }
 }
