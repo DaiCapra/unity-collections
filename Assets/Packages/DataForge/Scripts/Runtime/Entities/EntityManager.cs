@@ -66,13 +66,24 @@ namespace DataForge.Entities
             return data;
         }
 
-        public Entity Create<T>(Blueprint blueprint = null) where T : Archetype
+        public Entity Create<T>(Blueprint blueprint) where T : Archetype
         {
             var type = typeof(T);
             return Create(type, blueprint);
         }
 
-        public Entity Create(Type archetypeType, Blueprint blueprint = null)
+        public Entity Create<T>(string blueprintId) where T : Archetype
+        {
+            if (_blueprintManager.Blueprints.TryGetValue(blueprintId, out var blueprint))
+            {
+                var type = typeof(T);
+                return Create(type, blueprint);
+            }
+
+            return Entity.Null;
+        }
+
+        public Entity Create(Type archetypeType, Blueprint blueprint)
         {
             var archetype = EnsureArchetype(archetypeType);
 
