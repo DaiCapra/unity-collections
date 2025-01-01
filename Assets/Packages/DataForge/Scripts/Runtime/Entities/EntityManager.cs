@@ -178,6 +178,13 @@ namespace DataForge.Entities
             return list;
         }
 
+        public List<Entity> GetEntities(QueryDescription query)
+        {
+            var list = new List<Entity>();
+            CurrentWorld?.GetEntities(in query, list);
+            return list;
+        }
+
         public void Restore(Entity entity, EntityData data)
         {
             foreach (var component in data.components)
