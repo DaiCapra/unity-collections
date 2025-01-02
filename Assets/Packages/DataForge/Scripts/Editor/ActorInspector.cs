@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Arch.Core;
@@ -9,7 +10,9 @@ using DataForge.Editor.Reflection;
 using DataForge.Entities;
 using DataForge.Objects;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 namespace DataForge.Editor
 {
@@ -17,6 +20,8 @@ namespace DataForge.Editor
     public class ActorInspector : UnityEditor.Editor
     {
         private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+
+        private const int UpdateRate = 100;
         private Actor _actor;
         private VisualElement _root;
 
@@ -40,6 +45,12 @@ namespace DataForge.Editor
 
         private void UpdateInspector()
         {
+            var frame = Time.frameCount;
+            if (frame % UpdateRate != 0)
+            {
+                return;
+            }
+
             if (_actor != null && _actor.entity != Entity.Null)
             {
                 UpdateActor();
@@ -62,9 +73,6 @@ namespace DataForge.Editor
 
                 foreach (var kv in data.map)
                 {
-                    // var text = $"{kv.Key}:\t{kv.Value}";
-                    // var lbl = new Label { text = text };
-                    // foldout.Add(lbl);
                     var value = kv.Value;
                     if (value is ICollection collection)
                     {
