@@ -1,10 +1,4 @@
-using System.Threading.Tasks;
-using DataForge.Blueprints;
-using DataForge.Entities;
-using DataForge.Objects;
-using DataForge.ResourcesManagement;
-using DataForge.Tests;
-using UnityEditor;
+// using DataForge.Tests;
 using UnityEngine;
 
 namespace DataForge.Examples
@@ -15,7 +9,7 @@ namespace DataForge.Examples
 
         private async void Start()
         {
-            var resourceManager = new ResourceManager();
+            /*var resourceManager = new ResourceManager();
             await resourceManager.Load(DefaultLabel);
 
             var blueprintManager = new BlueprintManager(resourceManager);
@@ -31,7 +25,7 @@ namespace DataForge.Examples
             var e = em.Create<ResourceArchetype>(treeBlueprint);
             var g = em.Spawn(e);
 
-            Selection.activeObject = g;
+            Selection.activeObject = g;*/
         }
     }
 }
