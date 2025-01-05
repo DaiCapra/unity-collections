@@ -66,7 +66,7 @@ namespace DataForge.Objects
         {
         }
 
-        private static GameObject InstantiateGameObject(GameObject prefab)
+        public GameObject InstantiateGameObject(GameObject prefab)
         {
 #if UNITY_EDITOR
             var gameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;

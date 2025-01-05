@@ -15,5 +15,6 @@ namespace DataForge.Objects
             bool isActive = true);
 
         void Unmake(GameObject gameObject);
+        GameObject InstantiateGameObject(GameObject prefab);
     }
 }
