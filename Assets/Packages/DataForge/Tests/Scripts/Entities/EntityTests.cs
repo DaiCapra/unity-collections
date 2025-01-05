@@ -7,6 +7,7 @@ using DataForge.Objects;
 using DataForge.ResourcesManagement;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace DataForge.Tests
 {
@@ -47,7 +48,7 @@ namespace DataForge.Tests
             Assert.That(resource.amount, Is.EqualTo(_treeBlueprint.amount));
 
             var transform = entity.Get<STransform>();
-            Assert.That(transform.scale, Is.EqualTo(SVector3.One));
+            Assert.That(transform.scale, Is.EqualTo(Vector3.one));
         }
 
         [Test]

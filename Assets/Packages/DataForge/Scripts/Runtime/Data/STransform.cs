@@ -4,10 +4,9 @@ namespace DataForge.Data
 {
     public struct STransform
     {
-        public SVector3 position;
-        public SVector3 rotation;
-        public SVector3 scale;
-
+        public Vector3 position;
+        public Vector3 rotation;
+        public Vector3 scale;
 
         public static implicit operator STransform(Transform t)
         {

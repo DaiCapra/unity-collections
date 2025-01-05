@@ -11,14 +11,16 @@ namespace DataForge.Examples
 
         private async void Start()
         {
-            var v = new Vector3(42, 42, 42);
+            var v1 = new Vector3(42, 42, 42);
             var jsonSettings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
-            var json = JsonConvert.SerializeObject(v);
+            var json = JsonConvert.SerializeObject(v1, jsonSettings);
             Debug.Log(json);
+
+            var v2 = JsonConvert.DeserializeObject<Vector3>(json, jsonSettings);
 
             /*
             var resourceManager = new ResourceManager();
