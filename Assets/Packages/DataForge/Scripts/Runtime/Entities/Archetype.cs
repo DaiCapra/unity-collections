@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Arch.Core.Utils;
+using DataForge.Data;
 
 namespace DataForge.Entities
 {
@@ -8,6 +9,12 @@ namespace DataForge.Entities
     {
         public readonly List<ComponentType> types = new();
         public string Name => GetType().Name.Replace("Archetype", "");
+
+        public Archetype()
+        {
+            Add<Identifier>();
+            Add<BlueprintReference>();
+        }
 
         public ComponentType[] GetComponentTypes()
         {
