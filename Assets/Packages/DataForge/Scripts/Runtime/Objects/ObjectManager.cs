@@ -22,7 +22,7 @@ namespace DataForge.Objects
             }
 
             var gameObject = InstantiateGameObject(prefab);
-            gameObject.name = prefab.name;
+            // gameObject.name = prefab.name;
 
             if (position)
             {
