@@ -5,7 +5,7 @@ namespace DataForge.Data
     public struct STransform
     {
         public Vector3 position;
-        public Vector3 rotation;
+        public Quaternion rotation;
         public Vector3 scale;
 
         public static implicit operator STransform(Transform t)
@@ -13,7 +13,7 @@ namespace DataForge.Data
             return new()
             {
                 position = t.position,
-                rotation = t.rotation.eulerAngles,
+                rotation = t.rotation,
                 scale = t.localScale
             };
         }
@@ -21,7 +21,7 @@ namespace DataForge.Data
         public void Apply(Transform transform)
         {
             transform.position = position;
-            transform.rotation = Quaternion.Euler(rotation);
+            transform.rotation = rotation;
             transform.localScale = scale;
         }
     }

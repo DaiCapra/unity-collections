@@ -249,7 +249,7 @@ namespace DataForge.Entities
 
             var transform = entity.GetOrDefault<STransform>();
             var position = (Vector3)transform.position;
-            var rotation = (Vector3)transform.rotation;
+            var rotation = transform.rotation.eulerAngles;
 
             var gameObject = _objectManager.Make(
                 prefab,
