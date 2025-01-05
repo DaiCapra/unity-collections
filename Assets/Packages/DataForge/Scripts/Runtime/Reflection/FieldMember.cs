@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace DataForge.Editor.Reflection
+namespace DataForge.Reflection
 {
     public class FieldMember : Member
     {

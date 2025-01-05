@@ -1,4 +1,6 @@
 // using DataForge.Tests;
+
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace DataForge.Examples
@@ -9,7 +11,17 @@ namespace DataForge.Examples
 
         private async void Start()
         {
-            /*var resourceManager = new ResourceManager();
+            var v = new Vector3(42, 42, 42);
+            var jsonSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            var json = JsonConvert.SerializeObject(v);
+            Debug.Log(json);
+
+            /*
+            var resourceManager = new ResourceManager();
             await resourceManager.Load(DefaultLabel);
 
             var blueprintManager = new BlueprintManager(resourceManager);

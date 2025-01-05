@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace DataForge.Editor.Reflection
+namespace DataForge.Reflection
 {
     public class TypeCache
     {

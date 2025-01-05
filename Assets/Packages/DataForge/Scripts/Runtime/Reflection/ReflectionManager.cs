@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace DataForge.Editor.Reflection
+namespace DataForge.Reflection
 {
     public static class ReflectionManager
     {
@@ -27,6 +27,7 @@ namespace DataForge.Editor.Reflection
 
             var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
             var fields = type.GetFields(flags);
+
             foreach (var field in fields)
             {
                 map[field.Name] = new FieldMember(field);
