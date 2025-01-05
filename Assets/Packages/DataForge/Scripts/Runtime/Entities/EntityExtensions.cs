@@ -71,11 +71,6 @@ namespace DataForge.Entities
 
         public static ulong GetId(this Entity entity)
         {
-            if (!entity.Has<Identifier>())
-            {
-                return 0;
-            }
-
             return entity.Get<Identifier>().Id;
         }
 
