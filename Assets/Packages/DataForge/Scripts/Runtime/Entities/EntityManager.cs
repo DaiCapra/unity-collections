@@ -122,11 +122,6 @@ namespace DataForge.Entities
                 _objectManager?.Unmake(actor?.gameObject);
                 Actors.Remove(entity);
             }
-
-            if (entity.Has<Spawned>())
-            {
-                entity.Remove<Spawned>();
-            }
         }
 
         public void Destroy(Entity entity)
@@ -261,11 +256,6 @@ namespace DataForge.Entities
             if (gameObject == null)
             {
                 return null;
-            }
-
-            if (!entity.Has<Spawned>())
-            {
-                entity.Add<Spawned>();
             }
 
             Actors[entity] = gameObject.GetComponent<Actor>();

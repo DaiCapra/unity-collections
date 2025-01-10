@@ -39,7 +39,8 @@ namespace DataForge.Editor
         {
             _root ??= new();
             _actor = target as Actor;
-
+            
+            UpdateActor();
             return _root;
         }
 
@@ -51,14 +52,16 @@ namespace DataForge.Editor
                 return;
             }
 
-            if (_actor != null && _actor.entity != Entity.Null)
-            {
-                UpdateActor();
-            }
+            UpdateActor();
         }
 
         private void UpdateActor()
         {
+            if (_actor == null || _actor.entity == Entity.Null)
+            {
+                return;
+            }
+
             var entity = _actor.entity;
             var list = GetEntityData(entity);
 
