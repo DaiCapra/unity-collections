@@ -11,7 +11,7 @@ namespace DataForge.Reflection
 
         public static Dictionary<string, Member> GetMembers(Type type)
         {
-            if (Map.TryGetValue(type, out var c))
+            if (Map.TryGetValue(type, out var c) && c.membersSet)
             {
                 return c.members;
             }
@@ -41,13 +41,14 @@ namespace DataForge.Reflection
                 Map[type] = cache;
             }
 
+            cache.membersSet = true;
             cache.members = map;
             return map;
         }
 
         public static Dictionary<string, Member> GetMembers<T>(Type type) where T : Attribute
         {
-            if (Map.TryGetValue(type, out var c))
+            if (Map.TryGetValue(type, out var c) && c.attributeMembersSet)
             {
                 return c.attributeMembers;
             }
@@ -78,7 +79,8 @@ namespace DataForge.Reflection
                 cache = new();
                 Map[type] = cache;
             }
-
+            
+            cache.attributeMembersSet = true;
             cache.attributeMembers = map;
             return map;
         }

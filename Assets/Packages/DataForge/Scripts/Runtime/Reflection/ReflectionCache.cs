@@ -6,5 +6,7 @@ namespace DataForge.Reflection
     {
         public Dictionary<string, Member> attributeMembers = new();
         public Dictionary<string, Member> members = new();
+        public bool membersSet;
+        public bool attributeMembersSet;
     }
 }
