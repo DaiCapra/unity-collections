@@ -7,8 +7,8 @@ namespace DataForge.Reflection
 {
     public class ReflectionCache
     {
-        public Dictionary<string, Member> members = new();
         public Dictionary<string, Member> attributeMembers = new();
+        public Dictionary<string, Member> members = new();
     }
 
     public static class ReflectionManager
@@ -17,9 +17,9 @@ namespace DataForge.Reflection
 
         public static Dictionary<string, Member> GetMembers(Type type)
         {
-            if (Map.TryGetValue(type, out var cache))
+            if (Map.TryGetValue(type, out var c))
             {
-                return cache.members;
+                return c.attributeMembers;
             }
 
             var map = new Dictionary<string, Member>();
@@ -41,15 +41,21 @@ namespace DataForge.Reflection
                 map[property.Name] = new PropertyMember(property);
             }
 
-            Map[type].members = map;
+            if (!Map.TryGetValue(type, out var cache))
+            {
+                cache = new();
+                Map[type] = cache;
+            }
+
+            cache.attributeMembers = map;
             return map;
         }
 
         public static Dictionary<string, Member> GetMembers<T>(Type type) where T : Attribute
         {
-            if (Map.TryGetValue(type, out var cache))
+            if (Map.TryGetValue(type, out var c))
             {
-                return cache.attributeMembers;
+                return c.attributeMembers;
             }
 
             var map = new Dictionary<string, Member>();
@@ -73,7 +79,13 @@ namespace DataForge.Reflection
                 map[property.Name] = new PropertyMember(property);
             }
 
-            Map[type].attributeMembers = map;
+            if (!Map.TryGetValue(type, out var cache))
+            {
+                cache = new();
+                Map[type] = cache;
+            }
+
+            cache.attributeMembers = map;
             return map;
         }
     }
