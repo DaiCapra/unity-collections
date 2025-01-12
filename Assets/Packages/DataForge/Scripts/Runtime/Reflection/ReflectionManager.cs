@@ -5,12 +5,6 @@ using System.Reflection;
 
 namespace DataForge.Reflection
 {
-    public class ReflectionCache
-    {
-        public Dictionary<string, Member> attributeMembers = new();
-        public Dictionary<string, Member> members = new();
-    }
-
     public static class ReflectionManager
     {
         private static readonly Dictionary<Type, ReflectionCache> Map = new();
@@ -19,7 +13,7 @@ namespace DataForge.Reflection
         {
             if (Map.TryGetValue(type, out var c))
             {
-                return c.attributeMembers;
+                return c.members;
             }
 
             var map = new Dictionary<string, Member>();
@@ -47,7 +41,7 @@ namespace DataForge.Reflection
                 Map[type] = cache;
             }
 
-            cache.attributeMembers = map;
+            cache.members = map;
             return map;
         }
 
