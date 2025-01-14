@@ -4,13 +4,12 @@ namespace DataForge.Data
 {
     public struct OptionalValue<T> where T : new()
     {
-        private T _value;
+        public T value;
         public bool isSet;
-        [JsonIgnore] public T Value => _value;
 
         public override string ToString()
         {
-            return $"value: {_value}: set: {isSet}";
+            return $"value: {value}: set: {isSet}";
         }
 
         public static implicit operator bool(OptionalValue<T> obj)
@@ -20,14 +19,14 @@ namespace DataForge.Data
 
         public static implicit operator T(OptionalValue<T> obj)
         {
-            return obj._value;
+            return obj.value;
         }
 
         public static implicit operator OptionalValue<T>(T value)
         {
-            return new OptionalValue<T>()
+            return new()
             {
-                _value = value,
+                value = value,
                 isSet = true
             };
         }
