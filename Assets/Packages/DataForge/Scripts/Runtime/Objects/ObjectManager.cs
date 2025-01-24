@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace DataForge.Objects
 {
-    public class ObjectManager: IObjectManager
+    public class ObjectManager : IObjectManager
     {
+        public bool linkToPrefab = true;
+
         public GameObject Make(
             GameObject prefab,
             OptionalValue<Vector3> position = default,
@@ -50,7 +52,7 @@ namespace DataForge.Objects
 
             gameObject.SetActive(isActive);
             OnMake(gameObject);
-            
+
             return gameObject;
         }
 
@@ -68,11 +70,20 @@ namespace DataForge.Objects
 
         public GameObject InstantiateGameObject(GameObject prefab)
         {
+            GameObject gameObject = null;
+            if (linkToPrefab)
+            {
 #if UNITY_EDITOR
-            var gameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                gameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 #else
-            var gameObject = Object.Instantiate(prefab);
+                gameObject = Object.Instantiate(prefab);
 #endif
+            }
+            else
+            {
+                gameObject = Object.Instantiate(prefab);
+            }
+
             return gameObject;
         }
     }
