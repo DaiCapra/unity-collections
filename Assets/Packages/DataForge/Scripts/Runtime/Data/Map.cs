@@ -11,6 +11,11 @@ namespace DataForge.Data
         public void Add(T t)
         {
             ulong id = identity++;
+            if (t is IId i)
+            {
+                i.Id = id;
+            }
+
             this[id] = t;
         }
     }
