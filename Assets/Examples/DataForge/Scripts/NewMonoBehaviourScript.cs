@@ -8,7 +8,7 @@ using DataForge.Tests;
 using UnityEditor;
 using UnityEngine;
 
-namespace DataForge.Examples
+namespace DataForge.Scripts
 {
     public class NewMonoBehaviourScript : MonoBehaviour
     {

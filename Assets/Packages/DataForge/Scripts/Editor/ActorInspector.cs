@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Arch.Core;
@@ -12,7 +11,6 @@ using DataForge.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 namespace DataForge.Editor
 {

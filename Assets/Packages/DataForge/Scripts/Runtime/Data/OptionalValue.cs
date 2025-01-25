@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace DataForge.Data
+﻿namespace DataForge.Data
 {
     public struct OptionalValue<T> where T : new()
     {

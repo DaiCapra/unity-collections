@@ -264,7 +264,7 @@ namespace DataForge.Entities
 
         private void AddIdentifier(Entity entity)
         {
-            var id = _entityDataService.EntityIdentifier++;
+            var id = _entityDataService.Entities.identity++;
             var identifier = new Identifier
             {
                 Id = id
