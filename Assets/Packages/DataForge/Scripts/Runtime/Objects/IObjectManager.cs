@@ -6,6 +6,8 @@ namespace DataForge.Objects
 {
     public interface IObjectManager
     {
+        bool LinkToPrefab { get; set; }
+
         GameObject Make(
             GameObject prefab,
             OptionalValue<Vector3> position = default,

@@ -7,7 +7,7 @@ namespace DataForge.Objects
 {
     public class ObjectManager : IObjectManager
     {
-        public bool linkToPrefab = true;
+        public bool LinkToPrefab { get; set; } = true;
 
         public GameObject Make(
             GameObject prefab,
@@ -71,7 +71,7 @@ namespace DataForge.Objects
         public GameObject InstantiateGameObject(GameObject prefab)
         {
             GameObject gameObject = null;
-            if (linkToPrefab)
+            if (LinkToPrefab)
             {
 #if UNITY_EDITOR
                 gameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
