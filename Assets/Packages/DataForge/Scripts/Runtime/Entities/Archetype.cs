@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Arch.Core.Utils;
 using DataForge.Data;
+using DataForge.Objects;
 
 namespace DataForge.Entities
 {
@@ -14,6 +15,7 @@ namespace DataForge.Entities
         {
             Add<Identifier>();
             Add<BlueprintReference>();
+            Add<LayerRef>();
         }
 
         public ComponentType[] GetComponentTypes()
