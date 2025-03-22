@@ -51,7 +51,7 @@ namespace DataForge.Objects
             }
 
             gameObject.SetActive(isActive);
-            OnMake(gameObject);
+            OnMake(gameObject, entity);
 
             return gameObject;
         }
@@ -62,10 +62,6 @@ namespace DataForge.Objects
             {
                 Object.Destroy(gameObject);
             }
-        }
-
-        protected virtual void OnMake(GameObject gameObject)
-        {
         }
 
         public GameObject InstantiateGameObject(GameObject prefab)
@@ -85,6 +81,11 @@ namespace DataForge.Objects
             }
 
             return gameObject;
+        }
+
+        protected virtual void OnMake(GameObject gameObject, OptionalValue<Entity> entity = default)
+        {
+            
         }
     }
 }
