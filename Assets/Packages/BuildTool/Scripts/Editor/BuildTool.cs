@@ -58,6 +58,12 @@ namespace BuildTool.Editor
                 Run();
             }
 
+            if (GUILayout.Button("Build & Run"))
+            {
+                Build();
+                Run();
+            }
+
             if (GUILayout.Button("Open"))
             {
                 Open();
