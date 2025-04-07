@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -60,14 +61,21 @@ namespace BuildTool.Editor
 
             if (GUILayout.Button("Build & Run"))
             {
-                Build();
-                Run();
+                BuildAndRun();
             }
 
             if (GUILayout.Button("Open"))
             {
                 Open();
             }
+        }
+
+        private async void  BuildAndRun()
+        {
+            Build();
+            await Task.Delay(1000);
+            Run();
+            
         }
 
         private void Open()
